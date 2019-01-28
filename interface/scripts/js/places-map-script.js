@@ -23,7 +23,7 @@
 		
         map = new google.maps.Map($("#map")[0], {
           center: my_location,
-          zoom: 15
+          zoom: 10
         });
 
         infowindow = new google.maps.InfoWindow();
