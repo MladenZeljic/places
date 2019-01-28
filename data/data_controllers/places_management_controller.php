@@ -11,8 +11,8 @@
 			//Set header for response to text/html
 			header('Content-Type: text/html; charset=utf-8');
 			
-			//variable that will store response
-			$response = $_POST;
+			//Variable that will store response
+			$response = "";
 			
 			//If we get refresh_all action, proceed (this will happen when user clicks on "Bingo Shop list" tab on the page)
 			if(isset($_POST["action"])&&$_POST["action"]=='refresh_all'){
@@ -38,6 +38,7 @@
 		public function do_get_action(){
 			header('Content-Type: text/html; charset=utf-8');
 			
+			//Variable that will store response
 			$response = "";
 			
 			if(isset($_GET["action"])&&$_GET["action"]=='get_page'){
