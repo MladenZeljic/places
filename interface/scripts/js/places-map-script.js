@@ -1,7 +1,7 @@
 	  var map;
       var infowindow;
-	  var tuzla = {lat: 44.537950, lng: 18.673043};
-	  var location_string = "List of Bingo shops near Tuzla [Latitude:"+tuzla["lat"]+" Lognitude:"+tuzla["lng"]+"]:";
+	  var my_location = {lat: 44.599422, lng: 18.932194};
+	  var location_string = "List of Bingo shops near my location [Latitude:"+my_location["lat"]+" Lognitude:"+my_location["lng"]+"]:";
 	  var markers = new Array();
 	 /* markers.push({"name": "Bingo Hiper", 
 					  "address": "Address 123", 
@@ -9,28 +9,37 @@
 					  "longitude": "123.543543", 
 					  "latitude": "125.573543" 
 					});
-	   */ 
+	   */
+
+		var request = {
+			location: my_location
+			, radius: '20'
+			, query: "Bingo"
+			, type: "store"
+		};
+		
       function initMap() {
         $("#table-header-text").text(location_string);
 		
         map = new google.maps.Map($("#map")[0], {
-          center: tuzla,
+          center: my_location,
           zoom: 15
         });
 
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-          location: tuzla,
-          radius: 5,
-          type: ['store']
-        }, callback);
+		
+		
+		
+        service.textSearch(request,callback);
       }
 
       function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
+			if (distanceFromMyLocation(results[i].geometry.location.lat(),results[i].geometry.location.lng()) < request.radius) {
+				createMarker(results[i]);
+			}
           }
         }
       }
@@ -43,7 +52,7 @@
         });
 		markers.push({"name": place.name, 
 					  "address": place.formatted_address, 
-					  "distance": distanceFromTuzla(place.geometry.location.lat(),place.geometry.location.lng()), 
+					  "distance": distanceFromMyLocation(place.geometry.location.lat(),place.geometry.location.lng()), 
 					  "longitude": place.geometry.location.lng(), 
 					  "latitude": place.geometry.location.lat() 
 					});
@@ -73,6 +82,7 @@
 			  alert("No loactions to save!");
 		  }
 		   
+		   
 	  }
 	  
 	  //Stack overflow answer : https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
@@ -86,7 +96,7 @@
         return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
       }
 	  
-	  //Calculate the distance from tuzla location
-	  function distanceFromTuzla(lat,lon){
-		  return distance(tuzla["lat"],tuzla["lng"],lat,lon);
+	  //Calculate the distance from my location location
+	  function distanceFromMyLocation(lat,lon){
+		  return distance(my_location["lat"],my_location["lng"],lat,lon);
 	  }

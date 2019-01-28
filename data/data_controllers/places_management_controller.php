@@ -11,8 +11,8 @@
 			//Set header for response to text/html
 			header('Content-Type: text/html; charset=utf-8');
 			
-			//Variable that will store response
-			$response = "";
+			//variable that will store response
+			$response = $_POST;
 			
 			//If we get refresh_all action, proceed (this will happen when user clicks on "Bingo Shop list" tab on the page)
 			if(isset($_POST["action"])&&$_POST["action"]=='refresh_all'){
@@ -38,14 +38,13 @@
 		public function do_get_action(){
 			header('Content-Type: text/html; charset=utf-8');
 			
-			//Variable that will store response
 			$response = "";
 			
-			if(isset($_POST["action"])&&$_GET["action"]=='get_page'){
+			if(isset($_GET["action"])&&$_GET["action"]=='get_page'){
 				//if(isset($_POST["max_records_per_page"])&&isset($_POST["page"])){
 
 					//Maximum records per table page
-					$max_records = $_POST["max_records_per_page"];
+					$max_records = $_GET["max_records_per_page"];
 
 					//Get the current page number
 					$page_number = $_GET["page"];
@@ -58,6 +57,7 @@
 					
 					//Create the table string and echo it as a response
 					$util = new Util();
+					
 					$response = $util->create_shop_location_table_string($places,$page_number,$max_records,true);
 				//}
 			}

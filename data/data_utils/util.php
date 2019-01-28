@@ -17,7 +17,7 @@
 						<tr>
 							<th>Name</th>
 							<th>Address</th>
-							<th>Distance</th>
+							<th>Distance in km</th>
 							<th>Latitude</th>
 							<th>Longitude</th>
 						</tr>
@@ -84,7 +84,7 @@
 						$table_body = $table_body.'<tr id="row-"'.$shopLocation->get_id().'>';
 						$table_body = $table_body.'<td>'.$shopLocation->get_name().'</td>';
 						$table_body = $table_body.'<td>'.$shopLocation->get_address().'</td>';
-						$table_body = $table_body.'<td>'.$shopLocation->get_distance().'</td>';
+						$table_body = $table_body.'<td>'.number_format((float)$shopLocation->get_distance(), 2, '.', '').'</td>';
 						$table_body = $table_body.'<td>'.$shopLocation->get_latitude().'</td>';
 						$table_body = $table_body.'<td>'.$shopLocation->get_longitude().'</td>';
 						$table_body = $table_body.'</tr>';

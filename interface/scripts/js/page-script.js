@@ -82,7 +82,7 @@ function get_page(page){
 	$.ajax({
 		type: 'GET',
         url: "http://localhost/places/data/data_services/controller_service.php",
-        data: "action=get_page&max_records_per_page"+max_records_per_page+"&page="+page,
+        data: "action=get_page&max_records_per_page="+max_records_per_page+"&page="+page,
 		contentType: 'application/x-www-form-urlencoded',
 			   
         success: function(response) {

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+	$api_key="AIzaSyBz53Xi9neMaBLRZ7EVkyY861VLfO9y-HQ";
+?>
 <html>
   <head>
     <title>Place Searches</title>
@@ -42,7 +45,7 @@
 	<script src="/places/interface/scripts/js/page-script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBonUoRvHg6XpU2QAF6ywN-9vVhYlj1IU4&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo $api_key;?>&libraries=places&callback=initMap" async defer></script>
 	
   </body>
 </html>
